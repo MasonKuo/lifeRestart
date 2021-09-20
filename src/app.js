@@ -27,6 +27,10 @@ class App{
 
     initPages() {
 
+        const adPage = $(`
+            <div class="ss-section">广告内容</div>
+        `)
+
         // Loading
         const loadingPage = $(`
         <div id="main">
@@ -333,6 +337,9 @@ class App{
             });
 
         this.#pages = {
+            ad: {
+                page: adPage
+            },
             loading: {
                 page: loadingPage,
                 clear: ()=>{},
@@ -456,11 +463,13 @@ class App{
     }
 
     switch(page) {
+        const ad = this.#pages['ad'];
         const p = this.#pages[page];
         if(!p) return;
         $('#main').detach();
         p.clear();
         p.page.appendTo('body');
+        ad.page.appendTo('body');
     }
 
     hint(message, type='info') {
